@@ -1,6 +1,7 @@
 package com.heroes.app.service.impl;
 
 import com.heroes.app.entity.Heroe;
+import com.heroes.app.exception.custom.HeroeNotFoundException;
 import com.heroes.app.repository.HeroeRepository;
 import com.heroes.app.service.HeroeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class HeroeServiceImpl implements HeroeService {
     private HeroeRepository repository;
 
     @Autowired
-    private HeroeServiceImpl(HeroeRepository repository){
+    private HeroeServiceImpl(HeroeRepository repository) {
         this.repository = repository;
     }
 
@@ -25,7 +26,7 @@ public class HeroeServiceImpl implements HeroeService {
 
     @Override
     public Heroe getHeroeById(Long id) {
-        return repository.findById(id).orElseThrow(RuntimeException::new);
+        return repository.findById(id).orElseThrow(HeroeNotFoundException::new);
     }
 
     @Override
