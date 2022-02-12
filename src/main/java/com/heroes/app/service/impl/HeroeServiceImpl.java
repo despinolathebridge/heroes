@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class HeroeServiceImpl implements HeroeService {
 
+    private static String NAME_KEY = "name";
     private HeroeRepository repository;
 
     @Autowired
@@ -20,7 +23,12 @@ public class HeroeServiceImpl implements HeroeService {
     }
 
     @Override
-    public List<Heroe> getAllHeroes() {
+    public List<Heroe> getAllHeroes(Map<String, String> params) {
+
+        if (Optional.ofNullable(params.get(NAME_KEY)).isPresent()) {
+            return repository.findByNameContainsIgnoreCase(params.get(NAME_KEY));
+        }
+
         return repository.findAll();
     }
 

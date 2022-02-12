@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class HeroeFacade {
@@ -22,8 +23,8 @@ public class HeroeFacade {
         this.mapper = mapper;
     }
 
-    public List<HeroeResponseDTO> getAllHeroes() {
-        return mapper.toListDto(service.getAllHeroes());
+    public List<HeroeResponseDTO> getAllHeroes(Map<String, String> params) {
+        return mapper.toListDto(service.getAllHeroes(params));
     }
 
     public HeroeResponseDTO getHeroeById(Long id) {

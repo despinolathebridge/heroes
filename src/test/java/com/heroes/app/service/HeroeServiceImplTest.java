@@ -11,11 +11,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
@@ -94,14 +97,32 @@ class HeroeServiceImplTest {
 
     @Test
     void getAllHeroesOK() {
+        Map<String, String> queryMap = new HashMap<>();
         Heroe heroeDummy = HeroeTestUtils.createHeroeDummy();
         Heroe heroeDummy2 = HeroeTestUtils.createHeroeDummy();
 
         when(repository.findAll())
                 .thenReturn(List.of(heroeDummy, heroeDummy2));
 
-        List<Heroe> heroes = service.getAllHeroes();
+        List<Heroe> heroes = service.getAllHeroes(queryMap);
 
         assertEquals(heroes, List.of(heroeDummy, heroeDummy2));
+        verify(repository, times(1)).findAll();
+    }
+
+    @Test
+    void getAllHeroesWithNameQueryParamOK() {
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("name", "man");
+        Heroe heroeDummy = HeroeTestUtils.createHeroeDummy();
+        Heroe heroeDummy2 = HeroeTestUtils.createHeroeDummy();
+
+        when(repository.findByNameContainsIgnoreCase(eq("man")))
+                .thenReturn(List.of(heroeDummy, heroeDummy2));
+
+        List<Heroe> heroes = service.getAllHeroes(queryMap);
+
+        assertEquals(heroes, List.of(heroeDummy, heroeDummy2));
+        verify(repository, times(1)).findByNameContainsIgnoreCase(eq("man"));
     }
 }
