@@ -1,5 +1,6 @@
 package com.heroes.app.exception;
 
+import com.heroes.app.exception.custom.HeroeInvalidJWTException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,5 +20,15 @@ public class HeroeErrorHandler extends ResponseEntityExceptionHandler {
                         .errorCode(ex.getErrorCode())
                         .errorDescription(ex.getErrorDescription())
                         .build(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {HeroeInvalidJWTException.class})
+    public ResponseEntity<HeroeErrorResponseDTO> handleUnauthorizedException(HeroeGenericException ex) {
+        log.error("[ErrorHandler:Unauthorized] " + ex.getErrorDescription());
+        return new ResponseEntity<>(
+                HeroeErrorResponseDTO.builder()
+                        .errorCode(ex.getErrorCode())
+                        .errorDescription(ex.getErrorDescription())
+                        .build(), HttpStatus.UNAUTHORIZED);
     }
 }
