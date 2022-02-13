@@ -5,6 +5,9 @@ import com.heroes.app.exception.custom.HeroeNotFoundException;
 import com.heroes.app.repository.HeroeRepository;
 import com.heroes.app.service.HeroeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +21,7 @@ public class HeroeServiceImpl implements HeroeService {
     private HeroeRepository repository;
 
     @Autowired
-    private HeroeServiceImpl(HeroeRepository repository) {
+    public HeroeServiceImpl(HeroeRepository repository) {
         this.repository = repository;
     }
 
@@ -33,11 +36,13 @@ public class HeroeServiceImpl implements HeroeService {
     }
 
     @Override
+    @Cacheable(cacheNames="heroes", key="#id")
     public Heroe getHeroeById(Long id) {
         return repository.findById(id).orElseThrow(HeroeNotFoundException::new);
     }
 
     @Override
+    @CachePut(cacheNames = "heroes", key = "#heroe.id")
     public Heroe update(Heroe heroe) {
         Heroe heroeToUpdate = getHeroeById(heroe.getId());
         heroeToUpdate.setName(heroe.getName());
@@ -51,6 +56,7 @@ public class HeroeServiceImpl implements HeroeService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "heroes", key = "#id")
     public void delete(Long id) {
         repository.delete(getHeroeById(id));
     }
