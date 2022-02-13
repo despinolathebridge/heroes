@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changelog/heroes-ddl-v1.0.yaml
+  - include:
+      file: liquibase/changelog/heroes-dml-v1.0.yaml
