@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class HeroeController {
     @TimeTracker
     @PostMapping
     public ResponseEntity<HeroeResponseDTO> saveHeroe(@RequestBody HeroeRequestDTO request) {
-        return ResponseEntity.ok().body(this.facade.saveHeroe(request));
+        return ResponseEntity.created(URI.create("/heroes")).body(this.facade.saveHeroe(request));
     }
 
     @TimeTracker
