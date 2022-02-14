@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "e9cbde14-81a1-4cca-98b2-1fffc670a9fe",
+		"name": "heroes-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post-heroes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6InJhbmRvbSIsInVzZXJOYW1lIjoiZHVtbXkifQ.4Kwikj6Vh1CS-QtgZO0Z1CgQB_QSi6MVebCgbFdeyoY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Superman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/heroes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-heroes-byId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6InJhbmRvbSIsInVzZXJOYW1lIjoiZHVtbXkifQ.4Kwikj6Vh1CS-QtgZO0Z1CgQB_QSi6MVebCgbFdeyoY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/heroes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-heroes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6InJhbmRvbSIsInVzZXJOYW1lIjoiZHVtbXkifQ.4Kwikj6Vh1CS-QtgZO0Z1CgQB_QSi6MVebCgbFdeyoY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/heroes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-heroes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6InJhbmRvbSIsInVzZXJOYW1lIjoiZHVtbXkifQ.4Kwikj6Vh1CS-QtgZO0Z1CgQB_QSi6MVebCgbFdeyoY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Goku\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/heroes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-heroes-byCriteria",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6InJhbmRvbSIsInVzZXJOYW1lIjoiZHVtbXkifQ.4Kwikj6Vh1CS-QtgZO0Z1CgQB_QSi6MVebCgbFdeyoY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/heroes?name=man",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"heroes"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "man"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6InJhbmRvbSIsInVzZXJOYW1lIjoiZHVtbXkifQ.4Kwikj6Vh1CS-QtgZO0Z1CgQB_QSi6MVebCgbFdeyoY",
+				"type": "string"
+			}
+		]
+	}
+}
