@@ -21,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(HeroeController.class)
 class HeroeControllerTest {
 
-
     @Autowired
     MockMvc mockMvc;
 
@@ -34,14 +33,11 @@ class HeroeControllerTest {
     @MockBean
     private RestTemplate restTemplate;
 
-    private HeroeController heroeController;
-
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
         objectMapper = new ObjectMapper();
-        heroeController = new HeroeController(facade);
     }
 
     @Test
