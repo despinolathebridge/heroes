@@ -16,9 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
@@ -43,7 +42,7 @@ class HeroeServiceImplTest {
 
         Heroe heroe = service.save(heroeDummy);
 
-        assertEquals(heroe, heroeDummy);
+        assertThat(heroe).isEqualTo(heroeDummy);
     }
 
     @Test
@@ -58,7 +57,7 @@ class HeroeServiceImplTest {
 
         Heroe heroe = service.update(heroeDummy);
 
-        assertEquals(heroe, heroeDummy);
+        assertThat(heroe).isEqualTo(heroeDummy);
     }
 
     @Test
@@ -84,7 +83,7 @@ class HeroeServiceImplTest {
 
         Heroe heroe = service.getHeroeById(heroeDummy.getId());
 
-        assertEquals(heroe, heroeDummy);
+        assertThat(heroe).isEqualTo(heroeDummy);
     }
 
     @Test
@@ -92,7 +91,7 @@ class HeroeServiceImplTest {
         when(repository.findById(any()))
                 .thenThrow(HeroeNotFoundException.class);
 
-        assertThrows(HeroeNotFoundException.class, () -> service.getHeroeById(any()));
+        assertThrows(HeroeNotFoundException.class, () -> service.getHeroeById(10L));
     }
 
     @Test
@@ -106,7 +105,7 @@ class HeroeServiceImplTest {
 
         List<Heroe> heroes = service.getAllHeroes(queryMap);
 
-        assertEquals(heroes, List.of(heroeDummy, heroeDummy2));
+        assertThat(heroes).isEqualTo(List.of(heroeDummy, heroeDummy2));
         verify(repository, times(1)).findAll();
     }
 
@@ -117,12 +116,12 @@ class HeroeServiceImplTest {
         Heroe heroeDummy = HeroeTestUtils.createHeroeDummy();
         Heroe heroeDummy2 = HeroeTestUtils.createHeroeDummy();
 
-        when(repository.findByNameContainsIgnoreCase(eq("man")))
+        when(repository.findByNameContainsIgnoreCase("man"))
                 .thenReturn(List.of(heroeDummy, heroeDummy2));
 
         List<Heroe> heroes = service.getAllHeroes(queryMap);
 
-        assertEquals(heroes, List.of(heroeDummy, heroeDummy2));
-        verify(repository, times(1)).findByNameContainsIgnoreCase(eq("man"));
+        assertThat(heroes).isEqualTo(List.of(heroeDummy, heroeDummy2));
+        verify(repository, times(1)).findByNameContainsIgnoreCase("man");
     }
 }

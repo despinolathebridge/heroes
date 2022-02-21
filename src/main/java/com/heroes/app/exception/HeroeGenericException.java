@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public abstract class HeroeGenericException extends RuntimeException{
 
-    private String errorCode;
-    private String errorDescription;
+    private final String errorCode;
+    private final String errorDescription;
 
-    public HeroeGenericException(String errorCode,
+    protected HeroeGenericException(String errorCode,
                                  String errorDescription){
         this.errorCode = errorCode;
         this.errorDescription = errorDescription;

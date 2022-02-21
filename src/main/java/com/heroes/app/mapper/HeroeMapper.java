@@ -26,6 +26,6 @@ public class HeroeMapper {
     }
 
     public List<HeroeResponseDTO> toListDto(List<Heroe> heroes) {
-        return heroes.stream().map(heroe -> this.toDto(heroe)).collect(Collectors.toList());
+        return heroes.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

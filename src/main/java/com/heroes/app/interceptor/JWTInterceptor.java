@@ -27,7 +27,7 @@ public class JWTInterceptor implements HandlerInterceptor {
                     try {
                         DecodedJWT jwt = JWT.decode(value.split(PREFIX)[1]);
                         var scope = jwt.getClaim(SCOPE).asString();
-                        request.setAttribute("scope", scope);
+                        request.setAttribute(SCOPE, scope);
                     } catch (ArrayIndexOutOfBoundsException | JWTDecodeException e1) {
                         log.debug(e1.getMessage());
                         throw new HeroeInvalidJWTException();

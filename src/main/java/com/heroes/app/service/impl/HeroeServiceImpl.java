@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class HeroeServiceImpl implements HeroeService {
 
-    private static String NAME_KEY = "name";
+    private static final String NAME_KEY = "name";
     private HeroeRepository repository;
 
     @Autowired
